@@ -15,24 +15,37 @@ const Select = ({
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
+
   const changeValue = (newValue) => {
-    onChange();
+ 
+    onChange(newValue);
+  
     setValue(newValue);
-    setCollapsed(newValue);
+
+    setCollapsed(true); 
   };
+
+  const handleTitleClick = () => {
+    setCollapsed(!collapsed);
+  };
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
-          <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
+          <li
+            className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
+          
+            onClick={handleTitleClick}
+          >
             {value || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
             <>
               {!titleEmpty && (
                 <li onClick={() => changeValue(null)}>
-                  <input defaultChecked={!value} name="selected" type="radio" />{" "}
+                  <input defaultChecked={!value} name="selected" type="radio" readOnly />{" "} 
                   Toutes
                 </li>
               )}
@@ -42,6 +55,7 @@ const Select = ({
                     defaultChecked={value === s}
                     name="selected"
                     type="radio"
+                    readOnly 
                   />{" "}
                   {s}
                 </li>
