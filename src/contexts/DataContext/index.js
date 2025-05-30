@@ -29,14 +29,18 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     if (data) return;
     getData();
-  });
+  }, [data, getData]);
   
+  const last = data && data.events && data.events.length > 0
+    ? data.events[data.events.length - 1] : null;
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
+        last,
       }}
     >
       {children}
