@@ -44,18 +44,19 @@ const Slider = () => {
             </div>
           </div>
           <div className="SlideCard__paginationContainer">
-            <div className="SlideCard__pagination">
-              {byDateAs.map((slide, radioIdx) => (
-                <input
-                  key={slide.id || `radio-${radioIdx}`}
-                  type="radio"
-                  name="radio-button"
-                  checked={idx === radioIdx}
-                  readOnly
-                />
-              ))}
-            </div>
-          </div>
+  <div className="SlideCard__pagination">
+    {byDateAs.map((slide) => (
+      <input
+        key={slide.id || slide.title}
+        type="radio"
+        name="radio-button"
+        checked={index === byDateAs.indexOf(slide)}
+        readOnly
+      />
+    ))}
+  </div>
+</div>
+
         </React.Fragment>
       ))}
     </div>
